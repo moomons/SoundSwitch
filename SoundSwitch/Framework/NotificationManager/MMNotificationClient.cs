@@ -53,8 +53,15 @@ namespace SoundSwitch.Framework.NotificationManager
         {
             Task.Factory.StartNew(() =>
             {
-                var device = _enumerator.GetDevice(defaultDeviceId);
-                DefaultDeviceChanged?.Invoke(this, new DeviceDefaultChangedEvent(device, role));
+                if (defaultDeviceId != null)
+                {
+                    var device = _enumerator.GetDevice(defaultDeviceId);
+                    DefaultDeviceChanged?.Invoke(this, new DeviceDefaultChangedEvent(device, role));
+                }
+                else
+                {
+                    // TODO: Set to some default icon somehow
+                }
             });
         }
 
